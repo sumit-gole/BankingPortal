@@ -10,7 +10,8 @@ html, body { height:  100px; }
 body{
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: #f5f5f5;
+    background: #FFF;
+    /*background: #f5f5f5;*/
 }
 
 /* For Margin.. */

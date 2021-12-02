@@ -1,1 +1,138 @@
-<h1>Home works</h1>
+<!-- Payment Last... Section-->
+<mat-card class="mat-card1 mat-elevation-z0" style="padding-left: 40px; padding-bottom: 0px;">
+    <div class="row">
+        <div class="col-sm-6 col-lg-6" style="padding-top: 10px;">
+            <h1><b> Payments 
+                <span style="color: #20B2AA;"> Last week
+                    <a mat-icon-button routerLink="/">
+                        <mat-icon style="margin-right: 50px; margin-top: -5px;" x-position="before" [mat-menu-trigger-for]="menu">
+                            keyboard_arrow_down
+                        </mat-icon> 
+                    </a>
+                </span></b>
+            </h1>  
+            <mat-menu x-position="before" #menu="matMenu">
+                <a class="dropdown-item" mat-menu-item routerLink="/">Week</a>
+                <a class="dropdown-item" mat-menu-item routerLink="/">Month</a>
+                <a class="dropdown-item" mat-menu-item routerLink="/">Year</a>
+            </mat-menu>
+        </div>
+
+        <div class="col-sm-6 col-lg-2 d-none d-sm-block">
+            <mat-label>Income</mat-label>
+            <div style="color:#20B2AA; font-size: 30px; margin-top: 10px;">
+                <!--<mat-icon>attach_money</mat-icon>-->
+                $<span>{{ incomeAmonut | number }} </span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-2 d-none d-sm-block">
+            <mat-label>Outcome</mat-label>
+            <div style="color: #8B0000; font-size: 30px; margin-top: 10px;">
+                <!--<mat-icon>attach_money</mat-icon>-->
+                $<span>{{ outcomeAmonut | number }} </span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-2 d-none d-sm-block"  style="padding-top: 5px;">
+            <a mat-icon-button routerLink="/">
+                <mat-icon  x-position="before" [mat-menu-trigger-for]="menu1">
+                    keyboard_arrow_down
+                </mat-icon> 
+            </a>
+            <mat-label>Show analytics</mat-label>
+            <mat-menu x-position="before" #menu1="matMenu">
+                <a class="dropdown-item" mat-menu-item routerLink="/">Last 30 Days</a>
+                <a class="dropdown-item" mat-menu-item routerLink="/">Last 60 Days</a>
+                <a class="dropdown-item" mat-menu-item routerLink="/">Last 90 Days</a>
+            </mat-menu>
+        </div>
+    </div>
+</mat-card>
+
+<!-- Search/Display Section -->
+<mat-card class="mat-card2 mat-elevation-z0">
+    <div class="row">
+        <div class="col-md-1 col-sm-1" style="padding-top: 5px;">
+            All - <span style="font-weight: bold;">{{ bankPayment.length }}</span>
+        </div>
+        <div class="col-md-1 col-sm-1 " style="padding-top: 5px;">
+            <span style="color:green">●</span> 
+                Income 
+            <span style="font-weight: bold;">{{ incomeCount }}</span>
+        </div>
+        <div class="col-md-1 col-sm-1 " style="padding-top: 5px;">
+            <span style="color:red">●</span> 
+                Outcome 
+            <span style="font-weight: bold;">{{ outcomeCount }}</span>
+        </div>
+        <div class="col-md-2 col-sm-2 " style="padding-top: 5px;">
+            <span style="color:green">●</span> 
+                For Signature 
+            <span style="font-weight: bold;">{{ signCount }}</span>
+        </div>
+
+        <div class="col-md-4 "></div>
+        
+        <div class="col-md-3 ">
+            <div class="input-group">
+                <div class="search-hero">
+                    <!--<mat-icon><span class="material-icons">search</span></mat-icon>-->
+                    <input 
+                        [(ngModel)]="text"
+                        class=" form-control searchText fontAwesome" type="search" name="search" 
+                        autocomplete="off" placeholder="&#xF002; Search"
+                     />
+                  </div>
+            </div>
+        </div>
+    </div>
+</mat-card>
+
+<!-- Date Section -->
+<div class="container-fluid " style="padding-top: 10px; padding-left: 40px; font-size: 18px;">
+    Today, &nbsp;<span style="font-weight: bold;">{{ date | lowercase }}</span>
+</div>
+
+<!-- Cards Section -->
+<mat-card class="mat-elevation-z0">
+    <mat-card class="mat-card4 mat-elevation-z0" *ngFor="let bankPayments of bankPayment | filter: text">
+        <div class="row">
+            <div class="col-sm-6 col-lg-6">
+                <span style="font-size :18px; font-weight: bold;">{{ bankPayments.Name }}</span>
+                <span class="d-none d-sm-block"> {{ bankPayments.Description }}</span>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt10" *ngIf="bankPayments.Amount &lt; 0">
+                <span style="color: #8B0000; font-weight: bold; font-size: 16px;">$ {{ bankPayments.Amount }}</span>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt10" *ngIf="bankPayments.Amount &gt; 0">
+                <span style="color: #20B2AA; font-weight: bold; font-size: 16px;">$ {{ bankPayments.Amount }}</span>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt10" *ngIf="bankPayments.Category=='Income'">
+                <span class="incomeCategory"> {{ bankPayments.Category }} </span>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt10" *ngIf="bankPayments.Category=='Outcome'">
+                <span class="outcomeCategory"> {{ bankPayments.Category }} </span>
+            </div>
+            <div class="col-sm-3 col-lg-2 mt10" *ngIf="bankPayments.Category=='Sign'">
+                <span class="signCategory"> {{ bankPayments.Category }} </span>
+            </div>
+
+            <div class="col-sm-3 col-lg-2">
+                <mat-label>More</mat-label>
+                <a mat-icon-button routerLink="/">
+                    <mat-icon  x-position="before" [mat-menu-trigger-for]="menu2">
+                        keyboard_arrow_down
+                    </mat-icon> 
+                </a>
+                <mat-menu x-position="before" #menu2="matMenu">
+                    <a class="dropdown-item" mat-menu-item routerLink="/">Select 1</a>
+                    <a class="dropdown-item" mat-menu-item routerLink="/">Select 2</a>
+                    <a class="dropdown-item" mat-menu-item routerLink="/">Select 3</a>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-card>
+</mat-card>
+
+<br><br><br>
