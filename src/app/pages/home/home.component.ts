@@ -12,10 +12,12 @@ export class HomeComponent implements OnInit {
   searchText: string | any;
   incomeAmonut: number | any;
   outcomeAmonut: number | any;
+  signAmount: number | any;
 
   incomeCount: number | any;
   outcomeCount: number | any;
   signCount: number | any;
+  
   text: string | any;
   pay: any;
   bankPayment: bank[] | any;
@@ -25,9 +27,9 @@ export class HomeComponent implements OnInit {
   constructor(private bankService: BankService) { }
 
   ngOnInit(): void {
-    console.log(this.bankPayment)
     var incomeCalculate = 0;
     var outcomeCalculate = 0;
+    var signCalculate = 0;
     var countOutcome = 0;
     var countIncome = 0;
     var countSign = 0;
@@ -49,15 +51,16 @@ export class HomeComponent implements OnInit {
         }
 
         if (this.bankPayment[i].Category == "Sign") {
-          outcomeCalculate = outcomeCalculate - this.bankPayment[i].Amount;
-          countSign = countSign + 1;
+          countSign = countSign + 1
+          signCalculate = signCalculate + this.bankPayment[i].Amount;
         }
 
         this.outcomeCount = countOutcome;
         this.incomeCount = countIncome;
+        this.signCount = countSign;
         this.incomeAmonut = incomeCalculate;
         this.outcomeAmonut = outcomeCalculate;
-        this.signCount = countSign;
+        this.signAmount = signCalculate;
       }
     });
   }
