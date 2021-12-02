@@ -1,0 +1,71 @@
+<div class="bg-img">
+  
+  <mat-toolbar color="primary" class="p-3 mb-2 bg-transparent text-dark"> <!--class="p-3 mb-2 bg-transparent text-dark"-->
+    <a mat-icon-button routerLink="/" class="color-white ml20">
+      <img class="img-fluid img-css mr5" src="../../assets/logo/header_logo.PNG" alt="">
+      <!--<mat-icon >home</mat-icon> -->
+      {{title}}
+    </a>
+  
+    <!-- This fills the remaining space of the current row -->
+    <span class="space"></span>
+    <a routerLink="/"><mat-icon class="mr30 color-grey"> email</mat-icon></a>
+    <a routerLink="/"><mat-icon class="mr50 color-grey"> notifications</mat-icon></a>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <a style="margin-top: -5px;" mat-icon-button routerLink="/" class="mr20 color-grey" [mat-menu-trigger-for]="menu">
+        {{ name }}
+      </a>
+      <mat-icon class="ml10 color-grey" x-position="before" [mat-menu-trigger-for]="menu">
+        keyboard_arrow_down
+      </mat-icon>  
+    </div>
+  
+    <a mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm class="color-white">
+      <mat-icon>menu</mat-icon>
+    </a>
+
+  </mat-toolbar>
+  
+  <mat-menu x-position="before" #menu="matMenu" style="color: black;">
+    <a mat-menu-item routerLink="/" style="color: black;">MY ACCOUNT</a>
+    <a mat-menu-item routerLink="/">LOGOUT</a>
+    <hr class="dropdown-divider">
+    <a class="dropdown-item"  routerLink="/">HELP</a>
+    <!--<button mat-menu-item>Help</button>-->
+  </mat-menu><br>
+  
+  <mat-card>
+    <div class="form-group color-white">
+      <p style="font-size: 15px;" class="color-grey">Current account</p>
+      <div class="btn-group col">    
+        <h1 style="font-size: 40px;">$ 270 651<span style="font-size:x-large;" class="color-grey">.42</span></h1>
+      </div>
+        
+      <div class="btn-group col">  
+        <div class="container text-center">
+          <div class="btn-group col-6">
+            <button class="button" type="submit" mat-raised-button style="background-color: #20c997;"> 
+              <span>Make a payment </span>
+            </button>
+          </div>
+          <div class="btn-group col-6">
+            <button class="button ml20" type="reset" mat-raised-button style="background: rgba(255,255,255,0.1);
+              backdrop-filter: blur(8px);"> 
+              <span>Requisites  </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group col">
+        <button class="ml20" type="reset" mat-raised-button style="background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(5px);"> 
+          <mat-icon style="color:#8B0000; font-size: 15px; margin-top: 8px;">fiber_manual_record</mat-icon>
+          <span class="color-white"> 3 tasks </span> <span class="color-grey"> in the amount of $ 910 </span>
+        </button>
+      </div>
+
+      <br><br><br>
+    </div>
+  </mat-card>
+</div>
